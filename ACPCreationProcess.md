@@ -41,7 +41,7 @@ The resources you collected earlier allow you to easily create a comprehensive b
 
 -   Follow the principle of least privilege. In your ACP, explicitly allow ***only*** those resources required to perform the lab. You must follow this principle strictly for Microsoft.Compute resources, but you have some flexibility with other resources (see below).
 
--   You must **never** use an ACP in production that allows the creation of any and all resources under the Microsoft.Compute node. You must always specify what exactly resources are allowed under this node, for example, Microsoft.Compute/virtualmachines/extensions.
+-   You must **never** use an ACP in production that allows the creation of any and all resources under the Microsoft.Compute node. You must always specify exactly what resources are allowed under this node, for example, Microsoft.Compute/virtualmachines/extensions.
 
 -   For labs that use Azure VMs, you ***must always*** restrict VM creation by VM Name and by SKU. Optionally, you should also restrict by region. Allowing some flexibility for region and SKU selection is permitted, but don't leave it wide open: allow only a handful of SKUs and regions.
 
