@@ -35,9 +35,9 @@ To create a restrictive policy that allows only the resources required for a lab
 
 ## Creating the ACP
 
-The resources you collected earlier allow you to easily create a comprehensive but strict Access Control Policy by using either of two model templates and by following a few simple principles:
+The resources you collected earlier allow you to easily create a comprehensive but strict Access Control Policy by using using the model templates provided below and by following a few simple principles:
 
-### Principles
+### Principles for ACP creation
 
 -   Follow the principle of least privilege. In your ACP, explicitly allow ***only*** those resources required to perform the lab. You must follow this principle strictly for Microsoft.Compute resources, but you have some flexibility with other resources (see below).
 
