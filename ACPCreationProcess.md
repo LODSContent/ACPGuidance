@@ -7,21 +7,21 @@ This document provides basic information on the steps for creating a restrictive
 To create a restrictive policy that allows only the resources required for a lab, you must inventory and collect the resources that you create in Azure. To do this, when you get to the end of the lab steps, in the Azure portal,
 
 1.  From the hamburger tab, select All services.  
-    ![](images/image9.png){width="1.8747659667541556in" height="1.4269050743657044in"}
+    ![](images/image9.png)
 
 2.  In the All Service search box, enter and select **Resource Explorer**.  
-    ![](images/image10.png){width="4.3848687664042in" height="1.5935509623797026in"}
+    ![](images/image10.png)
 
 3.  In Resource Explorer, expand **Subscriptions**, expand the \[**subscription used in lab**\], expand **ResourceGroups**, expand \[**resource group used in lab**\], and select **Resources**.
 
 4.  Select any area in the Resources pane to the right, and press **Ctrl+A** to select all the content, and then press **Ctrl+C** to copy all the contents to the clipboard.  
       
-    ![](images/image11.png){width="6.5in" height="4.394444444444445in"}
+    ![](images/image11.png)
 
 5.  Open a text editor and press Ctrl+V to copy the contents of the clipboard.
 
 6.  If the resources list one or more VMs, select \[Microsoft.Compute/virtualMachines\]\[VMname\]  
-    ![](images/image12.png){width="6.5in" height="2.848611111111111in"}
+    ![](images/image12.png)
 
 7.  Make a note of the VM size.
 
@@ -170,4 +170,4 @@ In this case, the policy allows the creation of only VMs that are named WebVM1 i
 
 ### Other resources
 
-For many examples of restrictive ACPs, please go to [[https://labondemand.com/AccessControlPolicy/](https://labondemand.com/AccessControlPolicy/#%7B%22PageIndex%22%3A0%2C%22PageSize%22%3A%2220%22%2C%22Sort%22%3A%22Name%22%2C%22Filters%22%3A%5B%7B%22Name%22%3A%22Name%22%2C%22Value%22%3A%22lockdown%22%2C%22ComparisonType%22%3A%2210%22%2C%22Text%22%3A%22%22%7D%2C%7B%22Name%22%3A%22CloudPlatformId%22%2C%22Value%22%3A%22-1%22%2C%22ComparisonType%22%3A%220%22%2C%22Text%22%3A%22%22%7D%2C%7B%22Name%22%3A%22RequiresSecurityReview%22%2C%22Value%22%3A%220%22%2C%22ComparisonType%22%3A%22-1%22%2C%22Text%22%3A%22%22%7D%5D%2C%22OutputOptions%22%3A%5B%22Name%22%2C%22Organization%22%2C%22CloudPlatformId%22%2C%22RequiresSecurityReview%22%5D%2C%22TimeZoneId%22%3A%22Eastern%20Standard%20Time%22%7D), and search for policies that contain the name **Lockdown**
+For many examples of restrictive ACPs, please go to [https://labondemand.com/AccessControlPolicy/](https://labondemand.com/AccessControlPolicy/#%7B%22PageIndex%22%3A0%2C%22PageSize%22%3A%2220%22%2C%22Sort%22%3A%22Name%22%2C%22Filters%22%3A%5B%7B%22Name%22%3A%22Name%22%2C%22Value%22%3A%22lockdown%22%2C%22ComparisonType%22%3A%2210%22%2C%22Text%22%3A%22%22%7D%2C%7B%22Name%22%3A%22CloudPlatformId%22%2C%22Value%22%3A%22-1%22%2C%22ComparisonType%22%3A%220%22%2C%22Text%22%3A%22%22%7D%2C%7B%22Name%22%3A%22RequiresSecurityReview%22%2C%22Value%22%3A%220%22%2C%22ComparisonType%22%3A%22-1%22%2C%22Text%22%3A%22%22%7D%5D%2C%22OutputOptions%22%3A%5B%22Name%22%2C%22Organization%22%2C%22CloudPlatformId%22%2C%22RequiresSecurityReview%22%5D%2C%22TimeZoneId%22%3A%22Eastern%20Standard%20Time%22%7D). 
