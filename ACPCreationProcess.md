@@ -168,6 +168,71 @@ For labs that use VMs, you ***must*** limit VM creation by name and by SKU (size
 
 In this case, the policy allows the creation of only VMs that are named WebVM1 in the East US and East US 2 regions. Further, the user must choose 1 of 3 allowable sizes.
 
+### Limiting resources by SKU, family, capacity, or tier
+
+In some cases, it may be desirable to limit a service, for example SQL databases or web apps by by SKU, family, tier, or some other property to prevent abuse. Doing so requires that you use an "allOf" block, similar to the one you use when you limit an Azure VM by name or SKU. 
+
+The following shows an example of limiting a web server farm to a Standard S1 SKU:
+
+```json
+{
+    "if": {
+        "not": {
+            "anyOf": [
+                {
+                "allOf": [
+                    {
+                    "field": "type",
+                    "equals": "Microsoft.web/serverfarms"
+                    },
+                    {
+                    "field": "Microsoft.web/serverfarms/sku.name",
+                    "equals": "S1"
+                    },
+                    {
+                    "field": "Microsoft.web/serverfarms/sku.family",
+                    "equals": "S"
+                    },
+                    {
+                    "field": "Microsoft.web/serverfarms/sku.capacity",
+                    "equals": "1"
+                    }
+                    ]
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.Network/"
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.alertsmanagement/"
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.insights/"
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.Sql/servers/"
+                },                
+                {
+                    "field": "type",
+                    "contains": "Microsoft.web/sites"
+                }
+            ]
+        }
+    },
+    "then": {
+        "effect": "Deny"
+    }
+}
+
+```
+
+
+
+
+
 ### Other resources
 
 For many examples of restrictive ACPs, please go to [https://labondemand.com/AccessControlPolicy/](https://labondemand.com/AccessControlPolicy/#%7B%22PageIndex%22%3A0%2C%22PageSize%22%3A%2220%22%2C%22Sort%22%3A%22Name%22%2C%22Filters%22%3A%5B%7B%22Name%22%3A%22Name%22%2C%22Value%22%3A%22lockdown%22%2C%22ComparisonType%22%3A%2210%22%2C%22Text%22%3A%22%22%7D%2C%7B%22Name%22%3A%22CloudPlatformId%22%2C%22Value%22%3A%22-1%22%2C%22ComparisonType%22%3A%220%22%2C%22Text%22%3A%22%22%7D%2C%7B%22Name%22%3A%22RequiresSecurityReview%22%2C%22Value%22%3A%220%22%2C%22ComparisonType%22%3A%22-1%22%2C%22Text%22%3A%22%22%7D%5D%2C%22OutputOptions%22%3A%5B%22Name%22%2C%22Organization%22%2C%22CloudPlatformId%22%2C%22RequiresSecurityReview%22%5D%2C%22TimeZoneId%22%3A%22Eastern%20Standard%20Time%22%7D). 
