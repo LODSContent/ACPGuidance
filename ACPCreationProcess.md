@@ -82,9 +82,9 @@ When an ACP does not require that you limit the virtual machine resources, you c
 
 Examine the text file that contains an inventory of resources you saved earlier, and then replace or add the resources as appropriate to the Json code above.
 
-### Creating an ACP for a lab that has VM
+### Creating an ACP for a lab that has an Azure VM
 
-For labs that use VMs, you ***must*** limit VM creation by name and by SKU (size). As well, you should limit by region. The following JSON provides the basic pattern you can use:
+For labs that use Azure VMs, you ***must*** limit VM creation by name and by SKU (size). As well, you should limit by region. The following JSON provides the basic pattern you can use:
 
 ```Json
 {
