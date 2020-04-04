@@ -45,7 +45,7 @@ The resources you collected earlier allow you to easily create a comprehensive b
 
 -   For labs that use Azure VMs, you ***must always*** restrict VM creation by VM Name and by SKU. Optionally, you should also restrict by region. Allowing some flexibility for region and SKU selection is permitted, but don't leave it wide open: allow only a handful of SKUs and regions.
 
--   For all other resources, it is acceptable to allow any resource to be created under the parent node. For example, consider a lab that uses the both Microsoft,Network/networkinterfaces and Microsoft.Network/networkSecurityGroups resources. You do not have explicitly allow both Microsoft,Network/networkinterfaces and Microsoft.Network/networkSecurityGroups. You can simply allow all resources to be created under this and other nodes, with the exception.
+-   For all other resources, it is acceptable to allow any resource to be created under the parent node. For example, consider a lab that uses the both Microsoft,Network/networkinterfaces and Microsoft.Network/networkSecurityGroups resources. You do not have explicitly allow both Microsoft,Network/networkinterfaces and Microsoft.Network/networkSecurityGroups. You can simply allow all resources to be created under this and other nodes, with the exception of the Microsoft.Compute node.
 
 -   If possible, do try to restrict resources by SKU if there is a risk of a significant impact if a user chooses a more expensive SKU than required by the lab.
 
