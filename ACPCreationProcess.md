@@ -43,7 +43,9 @@ The resources you collected earlier allow you to easily create a comprehensive b
 
 -   You must **never** use an ACP in production that allows the creation of any and all resources under the Microsoft.Compute node. You must always specify exactly what resources are allowed under this node, for example, Microsoft.Compute/virtualmachines/extensions.
 
--   For labs that use Azure VMs, you ***must always*** restrict VM creation by VM Name and by SKU. Optionally, you should also restrict by region. Allowing some flexibility for region and SKU selection is permitted, but don't leave it wide open: allow only a handful of SKUs and regions.
+-   For labs that use Azure VMs, you ***must always*** restrict VM creation by SKU and by VM Name, if at all possible. Optionally, you should also restrict by region. Allowing some flexibility for region and SKU selection is permitted, but don't leave it wide open: allow only a handful of SKUs and regions.
+
+    >NOTE: In some cases, you might find that VM names are created by using functions that generate non-deterministic random strings,       making it very difficult to restrict VM creation by name. In this case, as a last-restort compromise, it is acceptable to limit by      SKU and region only.
 
 -   For all other resources, it is acceptable to allow any resource to be created under the parent node. For example, consider a lab that uses the both Microsoft,Network/networkinterfaces and Microsoft.Network/networkSecurityGroups resources. You do not have tp explicitly allow both Microsoft.Network/networkinterfaces and Microsoft.Network/networkSecurityGroups. You can simply allow all resources to be created under this node (Microsft.Network).
 
