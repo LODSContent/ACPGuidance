@@ -390,4 +390,7 @@ You can, therefore, use the following policy rule statement to restrict the VM n
 
 - Examples of restrictive ACPs: <a href="https://labondemand.com/AccessControlPolicy#%7B%22PageIndex%22%3A0%2C%22PageSize%22%3A%2220%22%2C%22Sort%22%3A%22Name%22%2C%22Filters%22%3A%5B%7B%22Name%22%3A%22Name%22%2C%22Value%22%3A%22lockdown%22%2C%22ComparisonType%22%3A%2210%22%2C%22Text%22%3A%22%22%7D%2C%7B%22Name%22%3A%22CloudPlatformId%22%2C%22Value%22%3A%22-1%22%2C%22ComparisonType%22%3A%220%22%2C%22Text%22%3A%22%22%7D%2C%7B%22Name%22%3A%22RequiresSecurityReview%22%2C%22Value%22%3A%220%22%2C%22ComparisonType%22%3A%22-1%22%2C%22Text%22%3A%22%22%7D%5D%2C%22OutputOptions%22%3A%5B%22Name%22%2C%22Organization%22%2C%22CloudPlatformId%22%2C%22RequiresSecurityReview%22%5D%2C%22TimeZoneId%22%3A%22Eastern%20Standard%20Time%22%7D" target="_blank">ACP Examples</a>. 
 
-- Microsoft ACP documentation: <a href="https://docs.microsoft.com/en-us/azure/governance/policy/samples/" target="_blank">Micrsoft ACP Samples</a>
+- Microsoft ACP documentation:
+   - <a href="https://docs.microsoft.com/en-us/azure/governance/policy/samples/" target="_blank">Micrsoft ACP Samples</a>
+   - <a href="https://docs.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure#conditions">Policy Definition Structure: conditions</a>
+   - <a href="https://docs.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure#aliases">Aliases</a>
