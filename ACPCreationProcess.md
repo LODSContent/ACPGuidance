@@ -84,7 +84,7 @@ When an ACP does not require that you limit the virtual machine resources, you c
 
 ```
 
-This could also be expressed as follows by makinng use of the **in** condition:
+This could also be expressed as follows by making use of the **in** condition:
 
    > NOTE: See **Advanced ACP topics** below for more information on the use of conditions in policies.
 
@@ -96,7 +96,7 @@ This could also be expressed as follows by makinng use of the **in** condition:
             "in": [                
                 "Microsoft.Storage/storageAccounts",
                 "Microsoft.Network",
-                "Microsoft.Sql/servers",
+                "Microsoft.Sql/servers"
              ]
         }
     },
