@@ -367,6 +367,7 @@ Create two virtual machines named vmweb@lab.labInstance.id and vmapp@lab.labInst
 
 The lab instance ID is added to the resource group properities as a tag. 
 
+    ![](images/2020-05-25_9-09-18.png)
 
 
 You can, therefore, use the following policy rule statement to restrict the VM names to the ones requested by the lab instructions as follows:
