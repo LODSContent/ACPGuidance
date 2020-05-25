@@ -84,6 +84,28 @@ When an ACP does not require that you limit the virtual machine resources, you c
 
 ```
 
+This could also be expressed as follows by makinng use of the **in** condition:
+
+   > NOTE: See **Advanced ACP topics** below for more information on the use of conditions in policies.
+
+```json
+{
+    "if": {
+        "not": {
+            "field": "type",
+            "in": [                
+                "Microsoft.Storage/storageAccounts",
+                "Microsoft.Network",
+                "Microsoft.Sql/servers",
+             ]
+        }
+    },
+    "then": {
+        "effect": "deny"
+    }
+}
+```
+
 Examine the text file that contains an inventory of resources you saved earlier, and then replace or add the resources as appropriate to the Json code above.
 
 ### Creating an ACP for a lab that has one or more Azure VMs
