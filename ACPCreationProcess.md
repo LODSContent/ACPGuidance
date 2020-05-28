@@ -53,6 +53,10 @@ The resources you collected earlier allow you to easily create a comprehensive b
 
 -   If possible, you should try to restrict resources by SKU if there is a risk of a significant impact if a user chooses a more expensive SKU than required by the lab.
 
+- Use only one ACP per resource group. Multiple ACPs add unnecessary complications and can have unintended consequences. Keep it simple and limit the number of ACPs. 
+
+- Finally, ***test the ACP***. Try to create a virtual machine resource that is outside the scope of your ACP. You should be prevented from doing so. If it is the case that you can create the resource, you will need to revise your ACP. Keep in mind that syntax errors can cause ACPs to not be applied. So, it may *only appear* that your ACP should block the resource.
+
 ### Creating an ACP for a lab that has no virtual machines
 
 When an ACP does not require that you limit the virtual machine resources, you can use the following template as a model:
