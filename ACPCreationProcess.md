@@ -45,7 +45,7 @@ The resources you collected earlier allow you to easily create a comprehensive b
 
 -   For labs that use Azure VMs, you ***must always*** restrict VM creation by SKU and by VM Name, if at all possible. Optionally, you should also restrict by region. Allowing some flexibility for region and SKU selection is permitted, but don't leave it wide open: allow only a handful of SKUs and regions.
     
--  Labs that use Scale Sets and Azure Kubernetes Service (AKS)  cluster pose additional challenges in that it is often not possible to constrain the virtual machines in the Scale Set or AKS cluster by name. In this case, you should try to limit virtual machine instances by naming pattern, capacity,  and/or image offer, where appropriate. Some examples of how to do this are provided below.
+-  Labs that use Scale Sets and Azure Kubernetes Service (AKS)  cluster pose additional challenges in that it is often not possible to constrain the virtual machines in the Scale Set or AKS cluster by name. In this case, you should try to limit virtual machine instances by ***capacity***, naming pattern, and/or image offer, where appropriate. Some examples of how to limit a Scale Set by capacity, naming pattern, and image offer are provided below.
 
     >NOTE: In some cases, you might find that VM names are created by using functions that generate non-deterministic random strings,       making it very difficult to restrict VM creation by name. In this case, as a last-restort compromise, it is acceptable to limit by      SKU and region only --but, only as a last resort and only when accompanied by other measures to mitigate risk.
 
