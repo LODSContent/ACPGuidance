@@ -1,6 +1,6 @@
 # Azure Access Control Policy Creation Process
 
-This document provides basic information on the steps for creating a restrictive Access Control Policy (ACP) that limits a lab to only the resources it requires.
+This document provides basic information on the steps for creating a restrictive Access Control Policy (ACP) that limits a lab to only the resources it requires and will meet the [LODS cloud security standards criteria for acceptance](https://docs.learnondemandsystems.com/lod/cloud-slice/cloud-security-standards.md "Cloud Security Standards)".
 
 ## Resource data collection
 
@@ -411,6 +411,8 @@ You can, therefore, use the following policy rule statement to restrict the VM n
 ### Other resources
 
 - Additional guidance from LODS: <a href = "https://github.com/LearnOnDemandSystems/labauthor/tree/master/access-control-policies"  target="_blank">What are Access Control Policies?</a>.
+
+- [LODS Cloud Security Standards](https://docs.learnondemandsystems.com/lod/cloud-slice/cloud-security-standards.md "Cloud Security Standards)
 
 - Public ACPs you can use immediately: [Managed ACPs](https://labondemand.com/AccessControlPolicy#%7B%22PageIndex%22%3A0%2C%22PageSize%22%3A%2220%22%2C%22Sort%22%3A%22Name%22%2C%22Filters%22%3A%5B%7B%22Name%22%3A%22CloudPlatformId%22%2C%22Value%22%3A%2210%22%2C%22ComparisonType%22%3A%220%22%2C%22Text%22%3A%22%22%7D%2C%7B%22Name%22%3A%22RequiresSecurityReview%22%2C%22Value%22%3A%220%22%2C%22ComparisonType%22%3A%22-1%22%2C%22Text%22%3A%22%22%7D%2C%7B%22Name%22%3A%22Public%22%2C%22Value%22%3A%220%22%2C%22ComparisonType%22%3A%220%22%2C%22Text%22%3A%22%22%7D%5D%2C%22OutputOptions%22%3A%5B%22Name%22%2C%22Organization%22%2C%22CloudPlatformId%22%2C%22RequiresSecurityReview%22%5D%2C%22TimeZoneId%22%3A%22Eastern%20Standard%20Time%22%7D "Managed ACPs")
 
