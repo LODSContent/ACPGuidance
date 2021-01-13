@@ -136,7 +136,7 @@ For labs that use Azure VMs, you ***must*** limit VM creation by name and by SKU
                             ]
                         },
                         {
-                            "field": "Microsoft.Compute/virtualMachines/osprofile.computername",
+                            "field": "name",
                             "in": [
                                 "WebVM1"
                             ]
@@ -270,7 +270,7 @@ Note the use of the condition **in** to limit the VM name to **WebVM**. Because 
 
 ```json
 {
-"field": "Microsoft.Compute/virtualMachines/osprofile.computername",
+"field": "name",
 "in": [
     "WebVM1",
     "WebVM2",
@@ -349,7 +349,7 @@ The **match**, **matchInsensitively**, **notMatch**, and **notMatchInsenstively*
 
 ```json
 {
-    "field": "Microsoft.Compute/virtualMachines/osprofile.computername",
+    "field": "name",
      "matchinsensitively": "WinVM-###"
 }
 ```
@@ -357,7 +357,7 @@ This said, dependending on the context, using the match conditions does provide 
 
 ```json
 {
-    "field": "Microsoft.Compute/virtualMachines/osprofile.computername",
+    "field": "name",
      "matchinsensitively": "aks-agentpool-########-#"
 }
 ```
@@ -378,7 +378,7 @@ You can use the same function in the policy rule, since the uniqueString functio
 
 ```
 {
-    "field": "Microsoft.Compute/virtualMachines/osprofile.computername",
+    "field": "name",
     "in": [
         "[concat('wvm', uniqueString(resourceGroup().id))]"
         ]
@@ -400,7 +400,7 @@ You can, therefore, use the following policy rule statement to restrict the VM n
 
 ```json
 {
-    "field": "Microsoft.Compute/virtualMachines/osprofile.computername",
+    "field": "name",
     "in": [
         "[concat('vmweb',resourcegroup().tags.LabInstance)]",
         "[concat('vmapp',resourcegroup().tags.LabInstance)]"
