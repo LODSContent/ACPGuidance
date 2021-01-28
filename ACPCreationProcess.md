@@ -198,6 +198,107 @@ For labs that use Azure VMs, you ***must*** limit VM creation by name and by SKU
 
 In this case, the policy allows the creation of only VMs that are named WebVM1 in the East US and East US 2 regions. Further, the user must choose 1 of 3 allowable sizes.
 
+### Creating an ACP for a lab that uses Azure Container Instances (ACI)
+
+LIke Azure VMs, containers provide compute resources. As such, for labs that use use containers, you ***must*** limit containers creation by name, memory, cpu, and gpu resources. You should also consider limiting by region as well. 
+
+   > NOTE: This section refers to Azure Container Instances (ACI), not Azure Kubernetes Service (AKS). AKS provides a container orchestration service for managing clusters and pods to deploy and scale applications. Examples of how to limit resources for labs that use AKS resources are provided later in this document. 
+
+The following JSON provides the basic pattern you can use:
+
+```Json
+{
+    "if": {
+        "not": {
+            "anyOf": [
+                {
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "equals": "Microsoft.ContainerInstance/containerGroups"
+                        },                        
+                        {
+                            "field": "name",
+                            "in": [
+                                "ci1234567"                                
+                            ]
+                        },
+                        {
+                            "field": "location",
+                            "In": [                                
+                                "eastus"
+                            ]
+                        },
+                        {
+                            "field": "Microsoft.ContainerInstance/containerGroups/containers[*].resources.requests.memoryInGB",
+                            "equals": 1.5
+                        },
+                        {
+                            "field": "Microsoft.ContainerInstance/containerGroups/containers[*].resources.requests.cpu",
+                            "equals": 1
+                        },
+                        {
+                            "field": "Microsoft.ContainerInstance/containerGroups/containers[*].resources.requests.gpu.count",
+                            "exists": false
+                        },
+                        {
+                            "field": "location",
+                            "notEquals": "global"
+                        }
+                    ]
+                },                                
+                {
+                    "field": "type",
+                    "contains": "Microsoft.Insights/autoscalesettings"
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.Insights/components"
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.Web/serverFarms"
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.Web/sites"
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.Web/connections"
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.ContainerRegistry/registries"
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.Logic/workflows"
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.alertsmanagement"
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.Storage/storageAccounts"
+                }
+            ]
+        }
+    },
+    "then": {
+        "effect": "Deny"
+    }
+}
+
+}
+
+```
+
+In this case, the policy allows the creation of only 1 container that is named ci1234567 that uses 1.5 GB of memory and a single CPU. The use of any GPUs is blocked by the policy. 
+
+   > NOTE: As of this writing, the GPU feature for ACI is in preview. Consequently, the method for blocking or limiting GPUs as shown above may change.
+
 
 ### Limiting resources by SKU, family, capacity, tier
 
