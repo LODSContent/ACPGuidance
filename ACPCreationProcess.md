@@ -49,11 +49,13 @@ The resources you collected earlier allow you to easily create a comprehensive b
 
     >NOTE: In some cases, you might find that VM names are created by using functions that generate non-deterministic random strings,       making it very difficult to restrict VM creation by name. In this case, as a last-restort compromise, it is acceptable to limit by      SKU and region only --but, only as a last resort and only when accompanied by other measures to mitigate risk.
 
--   For all other resources, it is acceptable to allow any resource to be created under the parent node. For example, consider a lab that uses the both Microsoft,Network/networkinterfaces and Microsoft.Network/networkSecurityGroups resources. You do not have to explicitly allow both Microsoft.Network/networkinterfaces and Microsoft.Network/networkSecurityGroups. You can simply allow all resources to be created under this node (Microsft.Network).
+-   For all other resources, it is acceptable to allow any resource to be created under the parent node. For example, consider a lab that uses the both Microsoft,Network/networkinterfaces and Microsoft.Network/networkSecurityGroups resources. You do not have to explicitly allow both Microsoft.Network/networkinterfaces and Microsoft.Network/networkSecurityGroups. You can simply allow all resources to be created under Microsft.Network node.
 
--   If possible, you should try to restrict resources by SKU if there is a risk of a significant impact if a user chooses a more expensive SKU than required by the lab.
+-   If possible, you should try to restrict resources by SKU if there is a risk of a significant impact (cost) if a user chooses a more expensive SKU than required by the lab.
 
-- Use only one ACP per resource group. Multiple ACPs add unnecessary complications and can have unintended consequences. Keep it simple and limit the number of ACPs. 
+- Use only one ACP per resource group. Multiple ACPs per resource group add unnecessary complications and can have unintended consequences. Keep it simple and limit the number of ACPs. 
+
+- Where appropriate, and for the sake of simplicity, you can use single ACP for all resource groups provisioned in your lab. However, if you have to make too many compromises to ensure that the ACP permits all lab-related resources in all resource groups at once, create an ACP for ***each*** resource group provisioned in your lab. 
 
 - Finally, ***test the ACP***. Try to create a virtual machine resource that is outside the scope of your ACP. You should be prevented from doing so. If it is the case that you can create the resource, you will need to revise your ACP. Keep in mind that syntax errors can cause ACPs to not be applied. So, it may *only appear* that your ACP should block the resource.
 
@@ -200,7 +202,7 @@ In this case, the policy allows the creation of only VMs that are named WebVM1 i
 
 ### Creating an ACP for a lab that uses Azure Container Instances (ACI)
 
-LIke Azure VMs, containers provide compute resources. As such, for labs that use use containers, you ***must*** limit containers creation by name, memory, cpu, and gpu resources. You should also consider limiting by region as well. 
+LIke Azure VMs, containers provide compute resources. As such, for labs that use use containers, you ***must*** limit container creation by name, memory, cpu, and gpu resources. You should also consider limiting by region as well. 
 
    > NOTE: This section refers to Azure Container Instances (ACI), not Azure Kubernetes Service (AKS). AKS provides a container orchestration service for managing clusters and pods to deploy and scale applications. Examples of how to limit resources for labs that use AKS resources are provided later in this document. 
 
