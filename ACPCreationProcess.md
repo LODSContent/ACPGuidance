@@ -45,15 +45,17 @@ The resources you collected earlier allow you to easily create a comprehensive b
 
 -   For labs that use Azure VMs, you ***must always*** restrict VM creation by SKU and by VM Name, if at all possible. Optionally, you should also restrict by region. Allowing some flexibility for region and SKU selection is permitted, but don't leave it wide open: allow only a handful of SKUs and regions.
     
--  Labs that use Scale Sets and Azure Kubernetes Service (AKS)  cluster pose additional challenges in that it is often not possible to constrain the virtual machines in the Scale Set or AKS cluster by name. In this case, you should try to limit virtual machine instances by ***capacity***, naming pattern, and/or image offer, where appropriate. Some examples of how to limit a Scale Set by capacity, naming pattern, and image offer are provided below.
+-  Labs that use Scale Sets and Azure Kubernetes Service (AKS)  cluster pose additional challenges in that it is sometimes not possible to constrain the virtual machines in the Scale Set or AKS cluster by name. In this case, you should try to limit virtual machine instances by ***capacity***, naming pattern, and/or image offer, where appropriate. Some examples of how to limit a Scale Set by capacity, naming pattern, and image offer are provided below.
 
-    >NOTE: In some cases, you might find that VM names are created by using functions that generate non-deterministic random strings,       making it very difficult to restrict VM creation by name. In this case, as a last-restort compromise, it is acceptable to limit by      SKU and region only --but, only as a last resort and only when accompanied by other measures to mitigate risk.
+    >NOTE: In some cases, you might find that VM names are created by using functions that generate non-deterministic random strings, making it very difficult to restrict VM creation by name. In this case, as a last-restort compromise, it is acceptable to limit by SKU and region only --but, only as a last resort and only when accompanied by other measures to mitigate risk.
 
 -   For all other resources, it is acceptable to allow any resource to be created under the parent node. For example, consider a lab that uses the both Microsoft,Network/networkinterfaces and Microsoft.Network/networkSecurityGroups resources. You do not have to explicitly allow both Microsoft.Network/networkinterfaces and Microsoft.Network/networkSecurityGroups. You can simply allow all resources to be created under Microsft.Network node.
 
--   If possible, you should try to restrict resources by SKU if there is a risk of a significant impact (cost) if a user chooses a more expensive SKU than required by the lab.
+-  If possible, you should try to restrict resources by SKU if there is a risk of a significant impact (cost) if a user chooses a more expensive SKU than required by the lab.
 
 - Use only one ACP per resource group. Multiple ACPs per resource group add unnecessary complications and can have unintended consequences. Keep it simple and limit the number of ACPs. 
+
+- Where possible and appropriate, use conditions and functions (see Advanced Topics below) to add both flexibility and security to your policies.
 
 - Where appropriate, and for the sake of simplicity, you can use single ACP for all resource groups provisioned in your lab. However, if you have to make too many compromises to ensure that the ACP permits all lab-related resources in all resource groups at once, create an ACP for ***each*** resource group provisioned in your lab. 
 
@@ -199,6 +201,8 @@ For labs that use Azure VMs, you ***must*** limit VM creation by name and by SKU
 ```
 
 In this case, the policy allows the creation of only VMs that are named WebVM1 in the East US and East US 2 regions. Further, the user must choose 1 of 3 allowable sizes.
+
+   > NOTE: We could also use a function to provide limit the region for the Azure virtual machine creation to the *same* region where the resource group is deployed without hard coding the specific regions. For infomation on how to do this, please see Advanced ACP creation topics later on in this guide.
 
 ### Creating an ACP for a lab that uses Azure Container Instances (ACI)
 
@@ -471,7 +475,7 @@ With some exceptions, all the [Azure Resource Manager functions](https://docs.mi
 
 The use of functions is particularly useful in cases where the lab author either creates resources or asks users to create resources which use names that are a combination of a string and some generated, deterministic value. Examples of generated, deterministic values include the lab instance ID or apparently unique strings created by the [uniqueString function](https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-string#uniquestring).
 
-Consider a scenario where a lab author uses an Azure Resource Manager (ARM) template to deploy a virttual machine. In the ARM template, the lab author specifies the name of the virtual machine as a combination of a text string plus a unique string based on the resource group ID as follows:
+Consider a scenario where a lab author uses an Azure Resource Manager (ARM) template to deploy a virtual machine. In the ARM template, the lab author specifies the name of the virtual machine as a combination of a text string plus a unique string based on the resource group ID as follows:
 
 ```
 [concat('wvm', uniqueString(resourceGroup().id))]
@@ -510,6 +514,122 @@ You can, therefore, use the following policy rule statement to restrict the VM n
          ]
 }
 ```
+
+Just as functions can be used to restrict resources by names that are both deterministic, but not known in advance, you can also use a function to restrict resources to the same location where the resource group is deployed. Consider this json snippet:
+
+```json
+{
+   "field": "location",
+   "In": [                                
+       "[resourceGroup().location]"
+        ]
+}
+```
+
+The use of the the [resourceGroup().location] is particularly useful where you want to allow resources, such as Azure virtual machines, to be deployed to any number of regions, depending on the location of the lab user, but restrict resource creation to the region where the resource group is located. 
+
+### Advanced ACP showing use of conditions and functions
+
+The following Access Control Policy is used for a lab that deploys a virtual machine and a scale set. Not the use of functions to restrict the names of the virtual machine and the scale set, as well as the location where these resources can be deployed. 
+
+```json
+{
+    "if": {
+        "not": {
+            "anyOf": [
+                {
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "equals": "Microsoft.Compute/virtualMachines"
+                        },
+                        {
+                            "field": "Microsoft.Compute/virtualMachines/sku.name",
+                            "in": [
+                                "Standard_A1_v2",
+                                "Standard_B2s"
+                            ]
+                        },
+                        {
+                            "field": "name",
+                            "in": [
+                                "[concat('vm',resourcegroup().tags.LabInstance,'jbox')]"
+                            ]
+                        },
+                        {
+                            "field": "location",
+                            "In": [
+                                "[resourceGroup().location]"
+                            ]
+                        },
+                        {
+                            "field": "location",
+                            "notEquals": "global"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        {
+                            "field": "type",
+                            "equals": "Microsoft.Compute/virtualMachineScaleSets"
+                        },
+                        {
+                            "field": "name",
+                            "in": [
+                                "[concat('vmfe',resourcegroup().tags.LabInstance)]",
+                                "[concat('vm',resourcegroup().tags.LabInstance)]"                               
+                            ]
+                        },
+                        {
+                            "field": "Microsoft.Compute/virtualMachineScaleSets/sku.name",
+                            "in": [
+                                "Standard_A1_v2",
+                                "Standard_B2s"
+                                ]
+                        },
+                        {
+                            "field": "Microsoft.Compute/virtualMachineScaleSets/sku.capacity",
+                            "lessOrEquals": 4
+                        },
+                        {
+                            "field": "location",
+                            "In": [
+                                "[resourceGroup().location]"
+                            ]
+                        },
+                        {
+                            "field": "location",
+                            "notEquals": "global"
+                        }
+                    ]
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.Network"
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.Compute/disks"
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.Insights/autoscalesettings"
+                },
+                {
+                    "field": "type",
+                    "contains": "Microsoft.Storage/storageAccounts"
+                }
+            ]
+        }
+    },
+    "then": {
+        "effect": "Deny"
+    }
+}
+```
+
+
 
 ### Other resources
 
