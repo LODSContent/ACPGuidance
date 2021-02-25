@@ -202,7 +202,7 @@ For labs that use Azure VMs, you ***must*** limit VM creation by name and by SKU
 
 In this case, the policy allows the creation of only VMs that are named WebVM1 in the East US and East US 2 regions. Further, the user must choose 1 of 3 allowable sizes.
 
-   > NOTE: We could also use a function to provide limit the region for the Azure virtual machine creation to the *same* region where the resource group is deployed without hard coding the specific regions. For infomation on how to do this, please see Advanced ACP creation topics later on in this guide.
+   > NOTE: We could also use a function, [resourceGroup().location], to limit the region for the Azure virtual machine creation to the *same* region where the resource group is deployed without hard coding the specific regions. For infomation on how to do this, please see Advanced ACP creation topics later on in this guide.
 
 ### Creating an ACP for a lab that uses Azure Container Instances (ACI)
 
