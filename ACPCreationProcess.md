@@ -510,7 +510,7 @@ The above section limits a virtual machine scale set to a maximum of 3 or less v
 
    >NOTE: In the example above the scale set is constrained to AKS clusters only by leveraging the image reference offer property. This provides an additional control to mitigate risk from the creation of resources that are outside of the scope of the lab.
 
-The **match**, **matchInsensitively**, **notMatch**, and **notMatchInsenstively** use `#` to match a digit, `?` a letter, and `.` to match any character and can can provide needed flexibilty. However, the match conditions should be used with caution, especially with regard to virtual machine names. For example, this expression would allow the creation of 1000 virtual machines named WinVM-000 to WinVM-999.
+The **match**, **matchInsensitively**, **notMatch**, and **notMatchInsenstively** use `#` to match a digit, `?` a letter, and `.` to match any character. Although match conditions can provide a great deal of flexibility, they should be used with caution, especially with regard to virtual machine names. For example, this expression would allow the creation of 1000 virtual machines named WinVM-000 to WinVM-999.
 
 ```json
 {
@@ -588,7 +588,7 @@ The use of the the [resourceGroup().location] is particularly useful where you w
 
 ### Advanced ACP showing use of conditions and functions
 
-The following Access Control Policy is used for a lab that deploys a virtual machine and a scale set. Not the use of functions to restrict the names of the virtual machine and the scale set, as well as the location where these resources can be deployed. 
+The following Access Control Policy is used for a lab that deploys a virtual machine and a scale set. Note the use of functions to restrict the names of the virtual machine and the scale set, as well as the location where these resources can be deployed. 
 
 ```json
 {
@@ -693,13 +693,15 @@ The following Access Control Policy is used for a lab that deploys a virtual mac
 
 - Additional guidance from LODS: <a href = "https://github.com/LearnOnDemandSystems/labauthor/tree/master/access-control-policies"  target="_blank">What are Access Control Policies?</a>.
 
-- Determining whether your ACP mitigates risk appropriately and is acceptable: [LODS Cloud Security Standards](https://docs.learnondemandsystems.com/lod/cloud-slice/cloud-security-standards.md "Cloud Security Standards")
+- Determine whether your ACP mitigates risk appropriately and is acceptable: [LODS Cloud Security Standards](https://docs.learnondemandsystems.com/lod/cloud-slice/cloud-security-standards.md "Cloud Security Standards")
 
 - Public ACPs you can use immediately: [Managed ACPs](https://labondemand.com/AccessControlPolicy#%7B%22PageIndex%22%3A0%2C%22PageSize%22%3A%2220%22%2C%22Sort%22%3A%22Name%22%2C%22Filters%22%3A%5B%7B%22Name%22%3A%22RequiresSecurityReview%22%2C%22Value%22%3A%220%22%2C%22ComparisonType%22%3A%22-1%22%2C%22Text%22%3A%22%22%7D%2C%7B%22Name%22%3A%22Public%22%2C%22Value%22%3A%220%22%2C%22ComparisonType%22%3A%220%22%2C%22Text%22%3A%22%22%7D%2C%7B%22Name%22%3A%22CloudPlatform%22%2C%22Value%22%3A%2210%22%2C%22ComparisonType%22%3A%220%22%2C%22Text%22%3A%22%22%7D%5D%2C%22OutputOptions%22%3A%5B%22Name%22%2C%22Organization%22%2C%22RequiresSecurityReview%22%5D%2C%22TimeZoneId%22%3A%22Eastern%20Standard%20Time%22%7D "Managed ACPs")
 
 - Examples of restrictive ACPs: <a href="https://labondemand.com/AccessControlPolicy#%7B%22PageIndex%22%3A0%2C%22PageSize%22%3A%2220%22%2C%22Sort%22%3A%22Name%22%2C%22Filters%22%3A%5B%7B%22Name%22%3A%22Name%22%2C%22Value%22%3A%22lockdown%22%2C%22ComparisonType%22%3A%2210%22%2C%22Text%22%3A%22%22%7D%2C%7B%22Name%22%3A%22CloudPlatformId%22%2C%22Value%22%3A%22-1%22%2C%22ComparisonType%22%3A%220%22%2C%22Text%22%3A%22%22%7D%2C%7B%22Name%22%3A%22RequiresSecurityReview%22%2C%22Value%22%3A%220%22%2C%22ComparisonType%22%3A%22-1%22%2C%22Text%22%3A%22%22%7D%5D%2C%22OutputOptions%22%3A%5B%22Name%22%2C%22Organization%22%2C%22CloudPlatformId%22%2C%22RequiresSecurityReview%22%5D%2C%22TimeZoneId%22%3A%22Eastern%20Standard%20Time%22%7D" target="_blank">ACP Examples</a>. (Note: this link will work only if you have sufficient permissions to view the policies returned in the query.)
 
-- Microsoft ACP documentation:
+- Microsoft Azure Policy documentation and samples:
    - <a href="https://docs.microsoft.com/en-us/azure/governance/policy/samples/" target="_blank">Microsoft ACP Samples</a>
    - <a href="https://docs.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure#conditions">Policy Definition Structure: conditions</a>
    - <a href="https://docs.microsoft.com/en-us/azure/governance/policy/concepts/definition-structure#aliases">Aliases</a>
+   - <a href="https://docs.microsoft.com/en-us/azure/governance/policy/samples/built-in-policies">Azure Policy built-in policy definitions</a>
+   - <a href="https://github.com/Azure/Community-Policy/tree/master/Policies">GitHub - Community Policy repo</a>
