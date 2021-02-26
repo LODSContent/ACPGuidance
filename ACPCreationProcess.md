@@ -51,7 +51,7 @@ The resources you collected earlier allow you to easily create a comprehensive b
 
 -   For all other resources, it is acceptable to allow any resource to be created under the parent node. For example, consider a lab that uses the both Microsoft,Network/networkinterfaces and Microsoft.Network/networkSecurityGroups resources. You do not have to explicitly allow both Microsoft.Network/networkinterfaces and Microsoft.Network/networkSecurityGroups. You can simply allow all resources to be created under Microsft.Network node.
 
--  If possible, you should try to restrict resources by SKU if there is a risk of a significant impact (cost) if a user chooses a more expensive SKU than required by the lab.
+-  If possible, you should try to restrict resources by SKU, family, tier, and/or capacity if there is a risk of a significant impact (cost) if a user chooses a more expensive SKU than required by the lab.
 
 - Use only one ACP per resource group. Multiple ACPs per resource group add unnecessary complications and can have unintended consequences. Keep it simple and limit the number of ACPs. 
 
@@ -366,6 +366,64 @@ The following shows an example of limiting a web server farm to a Standard S1 SK
 }
 
 ```
+
+The following shows how to limit an Azure SQL Server instance by name and the databases by SKU, tier, and capacity.
+
+```
+{
+    "if": {
+        "not": {
+            "anyOf": [
+               {
+            "allOf": [
+              {
+                "field": "type",
+                "equals": "Microsoft.Sql/servers"
+              },
+              {
+                "field": "name",
+                "equals": "[concat('sql',resourcegroup().tags.LabInstance)]"
+              },
+              {
+                "field": "location",
+                "equals": "[resourceGroup().location]"
+              },
+              {
+                "field": "location",
+                "notEquals": "global"
+              }
+            ]
+          },
+          {
+            "allOf": [
+              {
+                "field": "type",
+                "equals": "Microsoft.Sql/servers/databases"
+              },
+              {
+                "field": "Microsoft.Sql/servers/databases/sku.name",
+                "equals": "S0"
+              },
+              {
+                "field": "Microsoft.Sql/servers/databases/sku.tier",
+                "equals": "Standard"
+              },
+              {
+                "field": "Microsoft.Sql/servers/databases/sku.capacity",
+                "lessOrEquals": 10
+              }
+            ]
+          }
+         ]
+        }
+    },
+    "then": {
+        "effect": "deny"
+    }
+}
+```
+   > NOTE: The above ACP uses some advanced techniques, namely functions, to limit resource names and regions. For  infomation on how to use functions in an ACP, please see see the next topic.
+
 
 ## Advanced ACP creation topics
 
