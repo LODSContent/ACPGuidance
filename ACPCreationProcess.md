@@ -51,7 +51,9 @@ The resources you collected earlier allow you to easily create a comprehensive b
 
 -   For all other resources, it is acceptable to allow any resource to be created under the parent node. For example, consider a lab that uses the both Microsoft,Network/networkinterfaces and Microsoft.Network/networkSecurityGroups resources. You do not have to explicitly allow both Microsoft.Network/networkinterfaces and Microsoft.Network/networkSecurityGroups. You can simply allow all resources to be created under Microsft.Network node.
 
--  If possible, you should try to restrict resources by SKU, family, tier, and/or capacity if there is a risk of a significant impact (cost) if a user chooses a more expensive SKU than required by the lab.
+-  If possible, you should try to restrict resources by SKU, family, tier, and/or capacity if there is a risk of a significant impact (cost) if a user chooses a more expensive SKU than required by the lab. 
+ 
+    >NOTE: Restricting resources by SKU, family, tier, and capacity is particularly important for SQL Server instances, which can be associated with significant costs if users are allowed to choose whatever any kind of performance-related values they want. Please see below for guidance on how to restrict SQL Server resources. 
 
 - Use only one ACP per resource group. Multiple ACPs per resource group add unnecessary complications and can have unintended consequences. Keep it simple and limit the number of ACPs. 
 
@@ -61,7 +63,7 @@ The resources you collected earlier allow you to easily create a comprehensive b
 
 - Finally, ***test the ACP***. Try to create a virtual machine resource that is outside the scope of your ACP. You should be prevented from doing so. If it is the case that you can create the resource, you will need to revise your ACP. Keep in mind that syntax errors can cause ACPs to not be applied. So, it may *only appear* that your ACP should block the resource.
 
-### Creating an ACP for a lab that has no virtual machines
+### Creating an ACP for a lab that has no Azure virtual machines
 
 When an ACP does not require that you limit the virtual machine resources, you can use the following template as a model:
 
@@ -77,10 +79,6 @@ When an ACP does not require that you limit the virtual machine resources, you c
                 {
                     "field": "type",
                     "contains": "Microsoft.Network"
-                },
-                {
-                    "field": "type",
-                    "contains": "Microsoft.Sql/servers"
                 }
             ]
         }
@@ -103,8 +101,7 @@ This could also be expressed as follows by making use of the **in** condition:
             "field": "type",
             "in": [                
                 "Microsoft.Storage/storageAccounts",
-                "Microsoft.Network",
-                "Microsoft.Sql/servers"
+                "Microsoft.Network"
              ]
         }
     },
@@ -165,11 +162,7 @@ For labs that use Azure VMs, you ***must*** limit VM creation by name and by SKU
             {
             "field": "type",
             "contains": "Microsoft.web/serverfarms"
-            },
-            {
-            "field": "type",
-            "contains": "Microsoft.Sql/servers"
-            },
+            },            
             {
             "field": "type",
             "contains": "Microsoft.Network"
@@ -348,11 +341,7 @@ The following shows an example of limiting a web server farm to a Standard S1 SK
                 {
                     "field": "type",
                     "contains": "Microsoft.insights/"
-                },
-                {
-                    "field": "type",
-                    "contains": "Microsoft.Sql/servers/"
-                },                
+                },     
                 {
                     "field": "type",
                     "contains": "Microsoft.web/sites"
@@ -366,6 +355,8 @@ The following shows an example of limiting a web server farm to a Standard S1 SK
 }
 
 ```
+
+Azure SQL Server represents a special case. Although some kinds of deployments are "serverless" in that they don't rely on a specific Azure VM that you configure and deploy, they are always backed by compute and other resources that can be associated with significant costs if you allow users the ability to choose whatever number of SQL servers and database capacity they want. 
 
 The following shows how to limit an Azure SQL Server instance by name and the databases by SKU, tier, and capacity.
 
@@ -444,7 +435,7 @@ Note the use of the condition **in** to limit the VM name to **WebVM**. Because 
 }
 
 ```
-In the event that you want to create template ACP that you can use for multiple scenarios with little modification, using the **in** condition provides more flexibility for VM name restriction.
+In the event that you want to create a template ACP that you can use for multiple scenarios with little modification, using the **in** condition provides more flexibility for VM name restriction.
 
 The following conditions are supported:
 
