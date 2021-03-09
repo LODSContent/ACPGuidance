@@ -321,12 +321,12 @@ The following shows an example of limiting a web server farm to a Standard S1 SK
                     "equals": "S1"
                     },
                     {
-                    "field": "Microsoft.web/serverfarms/sku.family",
-                    "equals": "S"
+                    "field": "Microsoft.web/serverfarms/sku.tier",
+                    "equals": "Standard"
                     },
                     {
                     "field": "Microsoft.web/serverfarms/sku.capacity",
-                    "equals": "1"
+                    "lessOrEquals": 1
                     }
                     ]
                 },
