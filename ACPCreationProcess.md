@@ -1,6 +1,6 @@
 # Azure Access Control Policy Creation Process
 
-This document provides basic information on the steps for creating a restrictive Access Control Policy (ACP) that limits a lab to only the resources it requires and will meet the [Skillable cloud security standards criteria for acceptance](https://docs.learnondemandsystems.com/lod/cloud-slice/cloud-security-standards.md "Cloud Security Standards").
+This document provides basic information on the steps for creating a restrictive Access Control Policy (ACP) that limits a lab to only the resources it requires and will meet the [Skillable cloud security standards criteria for acceptance](https://docs.learnondemandsystems.com/lod/cloud-security/cloud-security-standards.md "Cloud Security Standards").
 
 ## Resource data collection
 
