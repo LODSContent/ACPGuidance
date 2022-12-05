@@ -8,8 +8,8 @@ isPublished: true
 
 Skillable is commited to ensuring a high degree of security on our platform. With this in mind, customers should also be aware that some configurations 
 may not have an optimal security posture for particular audiences or industries. For high security industries, such as banking or finance, or for those 
-customers who want to ensure as high a degree as security as possible, this document provides recommendations and explanation of some of the best practices 
-you should follow.
+customers who want to ensure as high a degree as security as possible, this document provides recommendations and explanations of some of the best practices 
+you should follow when creating labs on the Skillable platform.
 
 # VM Based Labs
 
