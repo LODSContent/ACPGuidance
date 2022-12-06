@@ -11,6 +11,30 @@ may not have an optimal security posture for particular audiences or industries.
 customers who want to ensure as high a degree as security as possible, this document provides recommendations and explanations of some of the best practices 
 you should follow when creating labs on the Skillable platform.
 
+# All Lab Types
+
+Whenever possible, follow the principle of least privilege. Do not provide lab users with more resources or permissions than they require.
+
+## Limit lab duration
+
+On the Basic Infromation tab of the lag profile properties page, ensure that the lab duration is sufficent only to allow most users to complete 
+the lab comfortably. 
+
+## Limit ability to Save/Cancel labs
+
+On the Advanced tab of the lab profile properties page, in the absence of a need for the functionality, ensure you have disabled the option to Save labs. In particular, disable these options.
+
+ - Allow user to Save Labs
+ - Allow User to Disconnect from Lab Client
+ - Auto-Save Incomplete Labs
+
+## Disable or limit authenticated launch links
+
+On the Advanced tab of the lab profile properties, you are able to give access to accounts that use a variety of authentication providers. These include Microsoft and Gmail accounts. 
+
+You should use authenticated launch links only when absolutely necessary for testing purposes. Furthermore, you should limit these links to expire 
+after a set period or remove them when the testing period has completed. 
+
 # VM Based Labs
 
 ## Disable Enhanced Session Mode (ESM)
@@ -32,11 +56,7 @@ blocks all web sites except those you explicitly authorize.
 For information on configuring Internet access in a lab profile, see the documentation on creating [networks](https://docs.learnondemandsystems.com/lod/feature-focus/lab-profiles/create.md#networks)
 For information on configuring Access Control Lists to restrict Internet access, see the documentation on Access Control Lists (https://docs.learnondemandsystems.com/lod/access-control-lists.md)
 
-## Disable or limit authenticated launch links
 
-On the Advanced tab of the lab profile properties, you are able to give access to accounts that use a variety of authentication providers. These include Microsoft and Gmail accounts. 
-You should use authenticated launch links only when absolutely necessary for testing purposes. Furthermore, you should limit these links to expire 
-after a set period or remove them when the testing period has completed. 
 
  
 # Cloud Slice Labs 
