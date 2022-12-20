@@ -22,7 +22,7 @@ the lab comfortably.
 
 ## Limit ability to Save/Cancel labs
 
-On the Advanced tab of the lab profile properties page, in the absence of a need for the functionality, ensure you have disabled the option to Save labs. In particular, disable these options.
+On the Advanced tab of the lab profile properties page, in the absence of a need for the functionality, ensure you have disabled the option to Save labs. In particular, **disable** these options.
 
  - Allow user to Save Labs
  - Allow User to Disconnect from Lab Client
@@ -37,11 +37,17 @@ after a set period or remove them when the testing period has completed.
 
 # VM Based Labs
 
-## Disable Enhanced Session Mode (ESM)
+## If necessary, disable Type Text
 
-For Windows virtual machines running on the Hyper-V platform, you can enable Enhanced Session Mode in the Virtual Machine Profile Settings. This setting allows you to copy text from a local 
-device to the clipboard and then to the virtual machine. If you have concerns about people being able to copy data from a local machine, you should 
-not enable this setting. You can find infromation on the setting here: [Create a Virtual Machine Profile ](https://docs.learnondemandsystems.com/lod/vm-profiles.md#hyper-v-1)
+In very high security environments, such as in the financial industry, it may be desirable to prevent users from being able to copy any information from 
+the clipboard of the local computer to the virtual machine. To prevent copying and pasting from the local device to the lab virtual machine, you can disable the Type Text option on the Advanced tab of the lab profile properties page. This will remove the Type Text menu option on the Commands menu. For more information on the Commands menu option, see [Commands menu](https://docs.learnondemandsystems.com/lod/lab-interface.md#commands-menu). 
+
+You can find the setting to remove the Commands menu option on the Advanced tab of the lab profile properties page:
+
+![](images/TypeText.jpg)
+
+ >NOTE: Disabling the Type Text menu option does not disable the ability to use the Type Text feature to copy text strings from the lab manual to the virtual 
+machine. Disabling the Type Text menu option will also disable the ability to redirect the clipboard for virtual machines that have Enhanced Session Mode (ESM) enabled. For information on ESM, see [Create a Virtual Machine Profile ](https://docs.learnondemandsystems.com/lod/vm-profiles.md#hyper-v-1)
 
 ## Disable or restrict Internet access
 
@@ -54,10 +60,8 @@ Access Control List (ACL) to the lab profile to ensure only a subset of authoriz
 blocks all web sites except those you explicitly authorize.
 
 For information on configuring Internet access in a lab profile, see the documentation on creating [networks](https://docs.learnondemandsystems.com/lod/feature-focus/lab-profiles/create.md#networks)
-For information on configuring Access Control Lists to restrict Internet access, see the documentation on Access Control Lists (https://docs.learnondemandsystems.com/lod/access-control-lists.md)
 
-
-
+For information on configuring Access Control Lists to restrict Internet access, see the documentation on [Access Control Lists](https://docs.learnondemandsystems.com/lod/access-control-lists.md)
  
 # Cloud Slice Labs 
 
@@ -71,8 +75,10 @@ that throttle usage after certain thresholds are triggered.
 ## Do not use Life Cycle Actions (LCA) to modify permissions in the cloud subscription
 
 LCAs can run scripts against your lab environment in the security context of the account you provided to enable integration with the Skillable platform.
-Consequently, these scripts are capable in some cases of changing permissions and roles that are otherwise not available in the lab environment. If you 
-have to add more permissions to a cloud subscription in order to perform the lab steps, you should consider althernatives. 
+Consequently, these scripts are capable in some cases of changing permissions and roles that are otherwise not available in the lab environment. 
+In most cases, using an LCA to modify the role of the lab user in the subscription would cause the lab to fail a security review. However, if the 
+role is benign, the lab could potentially pass a security review. That said, if you have to add more permissions to a cloud subscription in 
+order to perform the lab steps, you should consider whether the increased risk is justified. 
 
 ## Restrict guest invitations (Azure)
 
