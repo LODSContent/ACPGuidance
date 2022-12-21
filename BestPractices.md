@@ -13,20 +13,29 @@ you should follow when creating labs on the Skillable platform.
 
 # All Lab Types
 
-Whenever possible, follow the principle of least privilege. Do not provide lab users with more resources or permissions than they require.
+Whenever possible, follow the principle of least privilege. Do not provide lab users with more resources or permissions than they require. 
+
+Lab design can play a critical role here. For example, if you are creating a clould based lab that connects to Azure or AWS virtual machines and you do not allow otbound RDP or SSH access from your corporate network, consider creating a jump-box virtual machine on Hyper-V or ESX in one of the Skillable datacenters. Combined with other settings you can enable, you can better control what traffic leaves your network by using a jump box. 
 
 ## Limit lab duration
 
-On the Basic Infromation tab of the lag profile properties page, ensure that the lab duration is sufficent only to allow most users to complete 
+On the [Basic Infromation](https://docs.learnondemandsystems.com/lod/feature-focus/lab-profiles/create.md#basic-information) tab of the lab profile properties page, ensure that the lab duration is sufficent only to allow most users to complete 
 the lab comfortably. 
+
+![](images/DurationSettings.jpg)
 
 ## Limit ability to Save/Cancel labs
 
-On the Advanced tab of the lab profile properties page, in the absence of a need for the functionality, ensure you have disabled the option to Save labs. In particular, **disable** these options.
+In the absence of a need for the functionality, ensure you have disabled the option to Save labs. In particular, **disable** these options.
 
  - Allow user to Save Labs
  - Allow User to Disconnect from Lab Client
  - Auto-Save Incomplete Labs
+
+![](images/SaveCancelLabs.jpg)
+
+
+You can find these options on the Advanced tab of the lab profile property page. 
 
 ## Disable or limit authenticated launch links
 
@@ -68,8 +77,15 @@ For information on configuring Access Control Lists to restrict Internet access,
 ## Use a separate cloud subscription for integration with our platform
 
 The Skillable platform allows you to integrate subscriptions from other cloud providers such as AWS or Azure. You should not use the same
-subscription and billing account that use in a production environment. Furthermore, if possible, you should set billing caps on your subscriptions
+tenant/subscriptions and billing account that use in a production environment. Furthermore, if possible, you should set billing caps on your subscriptions
 that throttle usage after certain thresholds are triggered. 
+
+## For Azure tenants, limit external collaboration settings
+By default, the settings to invite external users for collaboration are relatively open. You should restrict guest access to your dedicated tenant such that Guest user access is highly restricted and that invitations can be sent only to a pre-approved list of external domains (or none at all). You can find these settings in the Azure portal by navigating to Default Directory | Users > Users | User Settings > External collaboration settings.  
+
+When configuring external collaboration settings, please ensure you allow invitations to the skillable.com domain.
+
+
 
 
 ## Do not use Life Cycle Actions (LCA) to modify permissions in the cloud subscription
@@ -88,7 +104,7 @@ inviting unauthorized accounts to access the lab resources in your cloud subscri
 ## Ensure Access Control Policies (ACPs) are as restrictive as possible
 
 When creating Access Control Policies for labs, ensure that the ACPs allow the creation of only the resources that are required to 
-complete the lab. For more information on ACPs and related topics, see [Cloud Security & Best Practices] (https://docs.learnondemandsystems.com/lod/cloud-security/cloud-security-home.md). 
+complete the lab. For more information on ACPs and related topics, see [Cloud Security & Best Practices](https://docs.learnondemandsystems.com/lod/cloud-security/cloud-security-home.md). 
 
 
 
