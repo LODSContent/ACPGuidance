@@ -74,18 +74,18 @@ For information on configuring Access Control Lists to restrict Internet access,
  
 # Cloud Slice Labs 
 
+The Skillable platform allows you to integrate subscriptions from other cloud providers such as AWS or Azure. When you integrate your cloud subscription with our platform, we take a number of measures to mitigate abuse. For example, in Azure subscriptions that are integrated with our platform, we create custom roles for the labs users that limit their ability to perform certain activities, such as purchase services in the Azure market place or invite guest users. For AWS integration, we implement permissions boundaries to limit the activities of lab users.
+
+That said, these are only initial controls. If you are integrating your cloud subscription with ours, there are a number of steps you must take to enhance security and mitigate the risk of abuse.
+
 ## Use a separate cloud subscription for integration with our platform
 
-The Skillable platform allows you to integrate subscriptions from other cloud providers such as AWS or Azure. You should not use the same
-tenant/subscriptions and billing account that use in a production environment. Furthermore, if possible, you should set billing caps on your subscriptions
-that throttle usage after certain thresholds are triggered. 
+You should not use the same tenant/subscriptions and billing account that use in a production environment. Furthermore, if possible, you should set billing caps on your subscriptions that throttle usage after certain thresholds are triggered. 
 
 ## For Azure tenants, limit external collaboration settings
-By default, the settings to invite external users for collaboration are relatively open. You should restrict guest access to your dedicated tenant such that Guest user access is highly restricted and that invitations can be sent only to a pre-approved list of external domains (or none at all). You can find these settings in the Azure portal by navigating to Default Directory | Users > Users | User Settings > External collaboration settings.  
+By default, when you integrate your Azure subscription with our platform, we change the collaboration settings to restrict guest access to your dedicated tenant. You can find these settings in the Azure portal by navigating to Default Directory | Users > Users | User Settings > External collaboration settings.  
 
-When configuring external collaboration settings, please ensure you allow invitations to the skillable.com domain.
-
-
+You should not modify the collabortion settings on this page. These settings are necessary to protect your subscription from lab users who may invite external users to gain unauthorized access to resources in the subscription. Although we do have automation to check these settings on a periodic basis and reset them if necessary, this check does not occur on every lab lab launch. 
 
 
 ## Do not use Life Cycle Actions (LCA) to modify permissions in the cloud subscription
