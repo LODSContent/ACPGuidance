@@ -76,7 +76,9 @@ For information on configuring Access Control Lists to restrict Internet access,
 
 The Skillable platform allows you to integrate subscriptions from other cloud providers such as AWS or Azure. When you integrate your cloud subscription with our platform, we take a number of measures to mitigate abuse. For example, in Azure subscriptions that are integrated with our platform, we create custom roles for the labs users that limit their ability to perform certain activities, such as purchase services in the Azure market place or invite guest users. For AWS integration, we implement permissions boundaries to limit the activities of lab users.
 
-That said, these are only initial controls. If you are integrating your cloud subscription with ours, there are a number of steps you must take to enhance security and mitigate the risk of abuse.
+That said, these are only initial controls. If you are integrating your cloud subscription with the Skillable platform, there are a number of steps you must take to enhance security and mitigate the risk of abuse.
+
+> [!Alert] Skillable makes good faith efforts to help minimize customer risk and to help prevent abuse of cloud subscriptions. However, given the rapidly evolving threat environment and other unknown factors, Skillable can make no warranties regarding the elimination or mitigation of risk. Skillable customers who integrate their subscriptions with the lab platfrom and wish to publish labs are responsible for making the final determination whether the risk level is acceptable.
 
 ## Use a separate cloud subscription for integration with our platform
 
